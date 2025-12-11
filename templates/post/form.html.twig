@@ -3,11 +3,11 @@
 {% block body %}
 	<main class="container">
 		<h1>Rédiger un article</h1>
-		{{form_start(form)}}
+		{{form_start(form)}} {# <form> #}
 		{{form_row(form.title)}}
 		{{form_row(form.image)}}
 		{{form_row(form.content)}}
 		<input type="submit" value="Publier">
-		{{form_end(form)}}
+		{{form_end(form)}} {# </form> #}
 	</main>
 {% endblock %}
