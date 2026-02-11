@@ -12,8 +12,11 @@
 						<h5 class="card-title">{{post.title}}</h5>
 						<p class="card-text">{{post.content}}</p>
 						<a href="post/read/{{post.id}}" class="btn btn-primary">Lire</a>
-						<a href="post/edit/{{post.id}}" class="btn btn-warning">Modifier</a>
-						<a href="post/delete/{{post.id}}" class="btn btn-danger">Supprimer</a>
+						{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+							<a href="post/edit/{{post.id}}" class="btn btn-warning">Modifier</a>
+							<a href="post/delete/{{post.id}}" class="btn btn-danger">Supprimer</a>
+						{% endif %}
+
 					</div>
 					<div class="card-footer text-body-secondary">
 						{{post.publishedAt | date("d/m/Y H:i")}}

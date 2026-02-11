@@ -16,6 +16,7 @@ class PostController extends AbstractController
     #[Route("/post/create", name: "post_create")]
     public function create(Request $request, ManagerRegistry $doctrine): Response
     {
+        $this->denyAccessUnlessGranted("IS_AUTHENTICATED_FULLY");
         $post = new Post(); // Article vide
         $form = $this->createForm(PostType::class, $post);
 
@@ -33,6 +34,8 @@ class PostController extends AbstractController
     #[Route("/post/edit/{id}", name: "post_edit")]
     public function edit(Request $request, ManagerRegistry $doctrine, Post $post): Response
     {
+        $this->denyAccessUnlessGranted("IS_AUTHENTICATED_FULLY");
+
         $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request); // L'objet 'post' est réhydraté
@@ -61,6 +64,8 @@ class PostController extends AbstractController
     #[Route("post/delete/{id}", name: "delete_post")]
     public function delete(ManagerRegistry $doctrine, Post $post): Response
     {
+        $this->denyAccessUnlessGranted("IS_AUTHENTICATED_FULLY");
+
         $em = $doctrine->getManager();
         $em->remove($post);
         $em->flush();
